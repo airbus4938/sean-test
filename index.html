@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Tournament Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="theme-toggle" title="Toggle Dark Mode">🌙</button>
+        <h1>Tennis Tournament Hub</h1>
+        
+        <div class="lottery-section">
+            <h3>Lucky Number Generator</h3>
+            <div class="numbers">
+                <!-- Numbers will be generated here -->
+            </div>
+            <button id="generate">Generate Numbers</button>
+        </div>
+
+        <div class="stringing-section">
+            <hr>
+            <h3>Stringing Service Request</h3>
+            <div id="stringing-form-container">
+                <div class="step active" data-step="1">
+                    <p>Step 1: Personal Info</p>
+                    <input type="text" id="player-name" placeholder="Name" required>
+                    <input type="text" id="player-affiliation" placeholder="Affiliation (Club/Team)">
+                    <div class="step-buttons">
+                        <button class="next-step">Next</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="2">
+                    <p>Step 2: Equipment</p>
+                    <input type="text" id="racket-type" placeholder="Racket Model" required>
+                    <input type="text" id="string-type" placeholder="String Type">
+                    <div class="step-buttons">
+                        <button class="prev-step">Back</button>
+                        <button class="next-step">Next</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="3">
+                    <p>Step 3: Main Tension</p>
+                    <div class="tension-input">
+                        <input type="number" id="main-tension" placeholder="Main Tension (0-99)" min="0" max="99">
+                        <select id="main-unit">
+                            <option value="lbs">lbs</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="prev-step">Back</button>
+                        <button class="next-step">Next</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="4">
+                    <p>Step 4: Cross Tension</p>
+                    <div class="tension-input">
+                        <input type="number" id="cross-tension" placeholder="Cross Tension (0-99)" min="0" max="99">
+                        <select id="cross-unit">
+                            <option value="lbs">lbs</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <div class="step-buttons">
+                        <button class="prev-step">Back</button>
+                        <button class="next-step">Next</button>
+                    </div>
+                </div>
+
+                <div class="step" data-step="5">
+                    <p>Step 5: Other Requests</p>
+                    <textarea id="other-requests" placeholder="Any other requests (e.g. stencil, overgrip)"></textarea>
+                    <div class="step-buttons">
+                        <button class="prev-step">Back</button>
+                        <button id="submit-request">Submit Request</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="request-history" class="history-hidden">
+                <h4>Recent Submissions</h4>
+                <ul id="submission-list"></ul>
+            </div>
+        </div>
+
+        <div class="weather-section">
+            <hr>
+            <div id="weather-container">
+                <p>Loading weather info...</p>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <hr>
+            <h3>Contact Organizer</h3>
+            <form action="https://formspree.io/f/myklnojj" method="POST" id="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="contact" placeholder="Your Phone Number" required>
+                </div>
+                <button type="submit" id="submit-btn">Send Message</button>
+            </form>
+        </div>
+
+        <div class="comments-section">
+            <hr>
+            <div id="disqus_thread"></div>
+            <script>
+                (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://tennisgoodman.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
