@@ -22,6 +22,44 @@ function updateToggleIcon() {
     themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
 }
 
+// iQAir Weather API Logic
+const API_KEY = '383547b9-9812-4356-8c09-67d32c6e46d9';
+const weatherContainer = document.getElementById('weather-container');
+
+async function fetchWeather() {
+    try {
+        const response = await fetch(`https://api.airvisual.com/v2/nearest_city?key=${API_KEY}`);
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            displayWeather(data.data);
+        } else {
+            weatherContainer.innerHTML = '<p>Weather data unavailable</p>';
+        }
+    } catch (error) {
+        console.error('Error fetching weather:', error);
+        weatherContainer.innerHTML = '<p>Error loading weather</p>';
+    }
+}
+
+function displayWeather(data) {
+    const city = data.city;
+    const temp = data.current.weather.tp;
+    const aqi = data.current.pollution.aqius;
+    const icon = data.current.weather.ic;
+
+    weatherContainer.innerHTML = `
+        <div class="weather-info">
+            <img src="https://www.airvisual.com/images/${icon}.png" alt="weather icon" width="40">
+            <span class="weather-temp">${temp}°C</span>
+            <span class="weather-aqi">AQI: ${aqi}</span>
+        </div>
+        <div class="weather-city">${city}</div>
+    `;
+}
+
+fetchWeather();
+
 // Generate Numbers Logic
 generateBtn.addEventListener('click', () => {
     generateNumbers();
