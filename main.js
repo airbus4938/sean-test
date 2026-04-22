@@ -1,7 +1,28 @@
 
 const numbersContainer = document.querySelector('.numbers');
 const generateBtn = document.getElementById('generate');
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
 
+// Theme Toggle Logic
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    body.classList.add(savedTheme);
+    updateToggleIcon();
+}
+
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const theme = body.classList.contains('dark-mode') ? 'dark-mode' : '';
+    localStorage.setItem('theme', theme);
+    updateToggleIcon();
+});
+
+function updateToggleIcon() {
+    themeToggle.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+}
+
+// Generate Numbers Logic
 generateBtn.addEventListener('click', () => {
     generateNumbers();
 });
